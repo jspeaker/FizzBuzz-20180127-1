@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using FizzBuzzApp;
+using FizzBuzzApp.Strategies;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FizzBuzz_20180127_1
@@ -10,52 +12,21 @@ namespace FizzBuzz_20180127_1
         public void GivenTwo_WhenAskingToString_ThenItShouldReturnTwoAsString()
         {
             // arrange
-            FizzBuzz fizzBuzz = new FizzBuzz(2);
+            FizzBuzzApplication fizzBuzzApplication = new FizzBuzzApplication(new FakeStrategy());
 
             // act
-            string one = fizzBuzz.ToString();
+            string one = fizzBuzzApplication.ToString();
 
             // assert
-            one.Should().Be("2");
+            one.Should().Be("foobar");
         }
+    }
 
-        [Test, Category("Unit")]
-        public void GivenSix_WhenAskingToString_ThenItShouldReturnFizz()
+    public class FakeStrategy : IFizzBuzzStrategy
+    {
+        public override string ToString()
         {
-            // arrange
-            FizzBuzz fizzBuzz = new FizzBuzz(6);
-
-            // act
-            string fizz = fizzBuzz.ToString();
-
-            // assert
-            fizz.Should().Be("fizz");
-        }
-
-        [Test, Category("Unit")]
-        public void GivenTen_WhenAskingToString_ThenItShouldReturnBuzz()
-        {
-            // arrange
-            FizzBuzz fizzBuzz = new FizzBuzz(10);
-
-            // act
-            string buzz = fizzBuzz.ToString();
-
-            // assert
-            buzz.Should().Be("buzz");
-        }
-
-        [Test, Category("Unit")]
-        public void GivenThirty_WhenAskingToString_ThenItShouldReturnFizzBuzz()
-        {
-            // arrange
-            FizzBuzz fizzBuzz = new FizzBuzz(30);
-
-            // act
-            string buzz = fizzBuzz.ToString();
-
-            // assert
-            buzz.Should().Be("fizzbuzz");
+            return "foobar";
         }
     }
 }
